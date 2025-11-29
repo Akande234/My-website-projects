@@ -1,0 +1,508 @@
+/*
+ * Global styles for the Geo‑Mapping Consults website.
+ *
+ * The palette draws inspiration from the original site (rich magenta and dark tones)
+ * while modernising typography and layout. Sections use generous spacing and
+ * responsive grids. Intersection observers animate elements on scroll to bring
+ * subtle life to the page without overwhelming the visitor. Navigation collapses
+ * gracefully on small devices.
+ */
+
+:root {
+  --primary-color: #981E5D;
+  --secondary-color: #333333;
+  --light-color: #F8F8F8;
+  --dark-color: #111111;
+  --max-width: 1200px;
+  --transition-speed: 0.3s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Mulish', sans-serif;
+  color: var(--secondary-color);
+  line-height: 1.6;
+  background-color: white;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Utility container */
+.container {
+  width: 90%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Navigation styles */
+header.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: url('../images/hero-bg.png') no-repeat center/cover;
+  color: white;
+}
+header.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+nav .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+nav .logo img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+nav .logo span {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+nav .nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+nav .nav-links li a {
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--transition-speed);
+}
+
+nav .nav-links li a:hover {
+  color: var(--primary-color);
+}
+
+nav .nav-links li a.active {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+nav .nav-toggle {
+  display: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+}
+
+/* Hero content */
+.hero-content {
+  text-align: center;
+  padding: 5rem 0 8rem;
+  z-index: 1;
+  position: relative;
+}
+
+.hero-content h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.8rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background var(--transition-speed), color var(--transition-speed), border var(--transition-speed);
+}
+
+.btn.primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn.primary:hover {
+  background: #7e174a;
+}
+
+.btn.secondary {
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn.secondary:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Section defaults */
+section {
+  padding: 4rem 0;
+}
+
+section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  position: relative;
+}
+
+section h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--primary-color);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* About preview */
+.about.preview p {
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+/* Center the call-to-action button in preview sections */
+.about.preview .btn,
+.services.preview .btn,
+.team.preview .btn {
+  display: inline-block;
+  margin: 1.5rem auto 0;
+}
+
+/* Services section */
+.services .cards,
+.services-list .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.services .card,
+.services-list .card {
+  background: var(--light-color);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.services .card i {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.services .card h3 {
+  margin-bottom: 0.6rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.services .card p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.services .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Team section */
+/* Grid layout for team cards used on the home page and dedicated team page */
+.team .team-cards,
+.team-page .team-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Shared member styling for team previews and team page */
+.team .member,
+.team-page .member {
+  text-align: center;
+}
+
+/* Image styling for member thumbnails */
+.team .member img,
+.team-page .member img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+/* Heading styling for member names */
+.team .member h3,
+.team-page .member h3 {
+  margin-bottom: 0.2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Role styling for members */
+.team .member p,
+.team-page .member p {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* CTA section */
+.cta {
+  background: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.cta h2 {
+  color: white;
+}
+
+.cta p {
+  margin: 1rem auto 2rem;
+  max-width: 700px;
+  line-height: 1.5;
+}
+
+.cta .btn.primary {
+  background: #ffffff;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.cta .btn.primary:hover {
+  background: #f0f0f0;
+}
+
+/* Footer */
+footer {
+  background: var(--dark-color);
+  color: #cccccc;
+  font-size: 0.9rem;
+}
+
+footer .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding-top: 3rem;
+}
+
+footer .footer-info img {
+  width: 60px;
+  margin-bottom: 1rem;
+}
+
+footer .footer-info p {
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+footer h4 {
+  margin-bottom: 0.8rem;
+  color: white;
+  font-size: 1.1rem;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer ul li {
+  margin-bottom: 0.5rem;
+}
+
+footer ul li a {
+  color: #cccccc;
+  text-decoration: none;
+  transition: color var(--transition-speed);
+}
+
+footer ul li a:hover {
+  color: var(--primary-color);
+}
+
+footer iframe {
+  border: 0;
+  border-radius: 8px;
+}
+
+footer .footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: 2rem;
+}
+
+/* Gallery grid styles */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.gallery-grid figure {
+  background: var(--light-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+.gallery-grid figure:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+.gallery-grid img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.gallery-grid figcaption {
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--secondary-color);
+}
+
+/* Projects list styles */
+.projects-list .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.projects-list .card {
+  background: var(--light-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.projects-list .card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.projects-list .card .card-content {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.projects-list .card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.projects-list .card p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.projects-list .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  nav .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-speed) ease;
+    z-index: 5;
+  }
+
+  nav .nav-links.open {
+    max-height: 300px;
+  }
+
+  nav .nav-toggle {
+    display: block;
+  }
+
+  nav .nav-links li a {
+    color: white;
+    font-size: 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+}
